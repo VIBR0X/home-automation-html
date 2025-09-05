@@ -777,7 +777,6 @@
 </head>
 
 <body>
-    <!-- Header -->
     <header>
         <nav>
             <a href="#" class="logo">
@@ -823,7 +822,6 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <h1>Why & What is Home Automation?</h1>
@@ -835,7 +833,6 @@
         </div>
     </section>
 
-    <!-- Features Section -->
     <section class="features">
         <div class="features-grid">
             <div class="feature-card">
@@ -883,7 +880,6 @@
         </div>
     </section>
 
-    <!-- Packages Section -->
     <section class="packages-section" id="packages">
         <h2>Choose Your Perfect Package</h2>
         <p class="packages-subtitle">Select from our range of smart home packages designed for different home sizes and
@@ -905,10 +901,8 @@
             </div>
         </div>
 
-        <!-- Home Automation Section -->
         <div class="service-section active" id="automation-section">
             <div class="automation-cards">
-                <!-- 1 BHK Automation Cards -->
                 <div class="automation-card show" data-bhk="1" data-service="automation">
                     <div class="card-header">
                         <span class="package-type">BASIC</span>
@@ -960,7 +954,6 @@
                     </div>
                 </div>
 
-                <!-- 2 BHK Automation Cards -->
                 <div class="automation-card" data-bhk="2" data-service="automation">
                     <div class="card-header">
                         <span class="package-type">BASIC</span>
@@ -1012,7 +1005,6 @@
                     </div>
                 </div>
 
-                <!-- 3 BHK Automation Cards -->
                 <div class="automation-card" data-bhk="3" data-service="automation">
                     <div class="card-header">
                         <span class="package-type">BASIC</span>
@@ -1064,7 +1056,6 @@
                     </div>
                 </div>
 
-                <!-- 4 BHK Automation Cards -->
                 <div class="automation-card" data-bhk="4" data-service="automation">
                     <div class="card-header">
                         <span class="package-type">BASIC</span>
@@ -1118,10 +1109,8 @@
             </div>
         </div>
 
-        <!-- Home Security Section -->
         <div class="service-section" id="security-section">
             <div class="automation-cards">
-                <!-- 1 BHK Security Cards -->
                 <div class="automation-card show" data-bhk="1" data-service="security">
                     <div class="card-header security">
                         <span class="package-type">BASIC</span>
@@ -1170,7 +1159,6 @@
                     </div>
                 </div>
 
-                <!-- 2 BHK Security Cards -->
                 <div class="automation-card" data-bhk="2" data-service="security">
                     <div class="card-header security">
                         <span class="package-type">BASIC</span>
@@ -1225,7 +1213,6 @@
                     </div>
                 </div>
 
-                <!-- 3 BHK Security Cards -->
                 <div class="automation-card" data-bhk="3" data-service="security">
                     <div class="card-header security">
                         <span class="package-type">BASIC</span>
@@ -1283,7 +1270,6 @@
                     </div>
                 </div>
 
-                <!-- 4 BHK Security Cards -->
                 <div class="automation-card" data-bhk="4" data-service="security">
                     <div class="card-header security">
                         <span class="package-type">BASIC</span>
@@ -1344,7 +1330,6 @@
         </div>
     </section>
 
-    <!-- Benefits Section -->
     <section class="benefits" id="about">
         <h2>Why Choose Epik?</h2>
         <p class="benefits-subtitle">Experience the future of smart living with our comprehensive solutions</p>
@@ -1359,7 +1344,6 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section class="contact-section" id="contact">
         <div class="contact-container">
             <div class="contact-info">
@@ -1405,64 +1389,64 @@
                 <h3>Schedule a Consultation</h3>
                 <p class="form-subtitle">Get a personalized smart home demonstration at your doorstep</p>
 
-                <form onsubmit="handleFormSubmit(event)">
+                <form id="consultationForm">
                     <div class="form-group">
-                        <input type="text" placeholder="Full Name *" required>
+                        <input type="text" id="fullName" name="fullName" placeholder="Full Name *" required>
                     </div>
 
                     <div class="form-group">
-                        <input type="email" placeholder="Email Address *" required>
+                        <input type="email" id="emailAddress" name="email" placeholder="Email Address *" required>
                     </div>
 
                     <div class="form-group">
-                        <input type="tel" placeholder="Phone Number *" pattern="[0-9]{10,}" minlength="10"
-                            maxlength="15" title="Please enter at least 10 digits (numbers only)"
+                        <input type="tel" id="phoneNumber" name="phone" placeholder="Phone Number *" pattern="[0-9]{10,}"
+                            minlength="10" maxlength="15" title="Please enter at least 10 digits (numbers only)"
                             oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                     </div>
 
                     <div class="form-group">
-                        <select required>
+                        <select id="bhkType" name="bhkType" required>
                             <option value="">Select BHK Type *</option>
-                            <option value="1bhk">1 BHK</option>
-                            <option value="2bhk">2 BHK</option>
-                            <option value="3bhk">3 BHK</option>
-                            <option value="4bhk">4 BHK</option>
-                            <option value="4bhk">4+ BHK</option>
+                            <option value="1 BHK">1 BHK</option>
+                            <option value="2 BHK">2 BHK</option>
+                            <option value="3 BHK">3 BHK</option>
+                            <option value="4 BHK">4 BHK</option>
+                            <option value="4+ BHK">4+ BHK</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <select required>
+                        <select id="propertyType" name="propertyType" required>
                             <option value="">Type of Property *</option>
-                            <option value="villa">Villa</option>
-                            <option value="house">Independent House</option>
-                            <option value="apartment">Apartment</option>
-                            <option value="builder">Builder</option>
+                            <option value="Villa">Villa</option>
+                            <option value="Independent House">Independent House</option>
+                            <option value="Apartment">Apartment</option>
+                            <option value="Builder">Builder</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <select required>
+                        <select id="propertyStatus" name="propertyStatus" required>
                             <option value="">Status of Property *</option>
-                            <option value="under-construction">Under Construction</option>
-                            <option value="completed">Construction Completed</option>
-                            <option value="renovation">Renovation</option>
-                            <option value="planning">Planning to Construct</option>
+                            <option value="Under Construction">Under Construction</option>
+                            <option value="Construction Completed">Construction Completed</option>
+                            <option value="Renovation">Renovation</option>
+                            <option value="Planning to Construct">Planning to Construct</option>
                         </select>
                     </div>
 
-                    <button type="submit" class="submit-btn">Schedule Appointment</button>
+                    <button type="submit" id="submitBtn" class="submit-btn">Schedule Appointment</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <div class="footer-logo">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="63.819" height="34.557" viewBox="0 0 63.819 34.557">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="63.819" height="34.557"
+                        viewBox="0 0 63.819 34.557">
                         <g id="Group_2" data-name="Group 2" transform="translate(0 0)">
                             <g id="Group_86451" data-name="Group 86451" transform="translate(0 0)">
                                 <path id="Path_1" data-name="Path 1"
@@ -1529,9 +1513,6 @@
     </footer>
 
     <script>
-
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyX3G0odG5ok4WJRnse1BySVqy--NY3a1xz1yckXiiqgsiCd33E4Bv4IJ9I4bOHwMME/execs';
-
         let currentBHK = 1;
         let currentService = 'automation';
 
@@ -1586,15 +1567,51 @@
             });
         }
 
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            alert('Thank you for your interest! We will contact you soon to schedule your appointment.');
-        }
-
         function toggleMobileMenu() {
             const navMenu = document.querySelector('.nav-menu');
             navMenu.classList.toggle('active');
         }
+
+        // --- NEW FORM SUBMISSION SCRIPT ---
+
+        // PASTE YOUR GOOGLE APPS SCRIPT URL HERE
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/a/macros/getepik.in/s/AKfycbzuXBRLvEfXE4TPiGrL08MnRVYaDbxoppX8KZTHwhyUSPSk4wXYHBBWti_5fzke4q5I/exec';
+        const form = document.getElementById('consultationForm');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submitBtn');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                body: new FormData(form)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.result === 'success') {
+                        alert('Thank you for your interest! We will contact you soon to schedule your appointment.');
+                        form.reset(); // Clear the form fields after successful submission
+                    } else {
+                        // This will show the error message from the Apps Script, if any
+                        console.error('Submission failed:', data.message);
+                        alert('An error occurred: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while submitting the form. Please check your connection and try again.');
+                })
+                .finally(() => {
+                    // Restore the button to its original state
+                    submitBtn.textContent = originalBtnText;
+                    submitBtn.disabled = false;
+                });
+        });
+
     </script>
 </body>
+
 </html>
