@@ -100,10 +100,198 @@
             box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
         }
 
+        /* Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background: linear-gradient(135deg, #0B2F5C, #1e3a5f);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Close Button */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: color 0.3s ease;
+            z-index: 10;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            color: #FFD700;
+        }
+
+        /* Form Styling */
+        .contact-form-container {
+            color: white;
+        }
+
+        .contact-form-container h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: white;
+            text-align: center;
+        }
+
+        .form-subtitle {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-group select {
+            color: white;
+        }
+
+        .form-group select:invalid {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-group select option {
+            background: #0B2F5C;
+            color: white;
+        }
+
+        .form-group select option[value=""] {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #FFD700, #FFC107);
+            color: #0B2F5C;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #FFC107, #FFD700);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .modal-content {
+                padding: 1.5rem;
+                margin: 1rem;
+                width: calc(100% - 2rem);
+            }
+
+            .contact-form-container h3 {
+                font-size: 1.5rem;
+            }
+
+            .close-btn {
+                top: 10px;
+                right: 15px;
+                font-size: 1.5rem;
+            }
+        }
+
         /* Hero Section */
         .hero {
             background: white;
-            padding: 8rem 2rem 4rem;
+            padding: 8rem 2rem 1rem;
             margin-top: 70px;
         }
 
@@ -432,7 +620,13 @@
             text-align: center;
             margin-bottom: 3rem;
             opacity: 0.9;
+            max-width: 1000px;
             font-size: 1.05rem;
+
+            line-height: 1.8;
+
+            margin: 0 auto;
+            margin-bottom: 1rem;
         }
 
         .benefits-grid {
@@ -777,6 +971,7 @@
 </head>
 
 <body>
+    <!-- Header -->
     <header>
         <nav>
             <a href="#" class="logo">
@@ -822,17 +1017,83 @@
         </nav>
     </header>
 
+    <!-- Popup Modal Overlay -->
+    <div id="contactModal" class="modal-overlay">
+        <div class="modal-content">
+            <!-- Close Button -->
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+
+            <!-- Contact Form Content -->
+            <div class="contact-form-container">
+                <h3>Schedule a Consultation</h3>
+                <p class="form-subtitle">Get a personalized smart home demonstration at your doorstep</p>
+
+                <form id="contactForm" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <input type="text" name="fullName" placeholder="Full Name *" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Email Address *" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="tel" name="phone" placeholder="Phone Number *" pattern="[0-9]{10,}" minlength="10"
+                            maxlength="15" title="Please enter at least 10 digits (numbers only)"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                    </div>
+
+                    <div class="form-group">
+                        <select name="bhkType" required>
+                            <option value="">Select BHK Type *</option>
+                            <option value="1bhk">1 BHK</option>
+                            <option value="2bhk">2 BHK</option>
+                            <option value="3bhk">3 BHK</option>
+                            <option value="4bhk">4 BHK</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <select name="propertyType" required>
+                            <option value="">Type of Property *</option>
+                            <option value="villa">Villa</option>
+                            <option value="house">Independent House</option>
+                            <option value="apartment">Apartment</option>
+                            <option value="builder">Builder</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <select name="propertyStatus" required>
+                            <option value="">Status of Property *</option>
+                            <option value="under-construction">Under Construction</option>
+                            <option value="completed">Construction Completed</option>
+                            <option value="renovation">Renovation</option>
+                            <option value="planning">Planning to Construct</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">Schedule Appointment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <h1>Why & What is Home Automation?</h1>
             <p class="hero-text">
-                Your home should adapt to you—not the other way around. That’s where
-                EPIK steps in as your trusted solutioning partner, transforming ordinary
-                homes into intelligent, future-ready living spaces.
+                A true smart home is one that adapts seamlessly to your lifestyle, anticipating your needs and enhancing
+                everyday living—rather than demanding that you adjust to it. At EPIK, we take pride in being your
+                trusted solutioning partner, dedicated to transforming conventional houses into intelligent, connected,
+                and future-ready living spaces. With our expertise, your home becomes more than just a place to live—it
+                evolves into a personalized experience of comfort, convenience, and innovation.
             </p>
         </div>
     </section>
 
+    <!-- Features Section -->
     <section class="features">
         <div class="features-grid">
             <div class="feature-card">
@@ -880,6 +1141,7 @@
         </div>
     </section>
 
+    <!-- Packages Section -->
     <section class="packages-section" id="packages">
         <h2>Choose Your Perfect Package</h2>
         <p class="packages-subtitle">Select from our range of smart home packages designed for different home sizes and
@@ -901,8 +1163,10 @@
             </div>
         </div>
 
+        <!-- Home Automation Section -->
         <div class="service-section active" id="automation-section">
             <div class="automation-cards">
+                <!-- 1 BHK Automation Cards -->
                 <div class="automation-card show" data-bhk="1" data-service="automation">
                     <div class="card-header">
                         <span class="package-type">BASIC</span>
@@ -954,6 +1218,7 @@
                     </div>
                 </div>
 
+                <!-- 2 BHK Automation Cards -->
                 <div class="automation-card" data-bhk="2" data-service="automation">
                     <div class="card-header">
                         <span class="package-type">BASIC</span>
@@ -1005,6 +1270,7 @@
                     </div>
                 </div>
 
+                <!-- 3 BHK Automation Cards -->
                 <div class="automation-card" data-bhk="3" data-service="automation">
                     <div class="card-header">
                         <span class="package-type">BASIC</span>
@@ -1056,6 +1322,7 @@
                     </div>
                 </div>
 
+                <!-- 4 BHK Automation Cards -->
                 <div class="automation-card" data-bhk="4" data-service="automation">
                     <div class="card-header">
                         <span class="package-type">BASIC</span>
@@ -1109,8 +1376,10 @@
             </div>
         </div>
 
+        <!-- Home Security Section -->
         <div class="service-section" id="security-section">
             <div class="automation-cards">
+                <!-- 1 BHK Security Cards -->
                 <div class="automation-card show" data-bhk="1" data-service="security">
                     <div class="card-header security">
                         <span class="package-type">BASIC</span>
@@ -1159,6 +1428,7 @@
                     </div>
                 </div>
 
+                <!-- 2 BHK Security Cards -->
                 <div class="automation-card" data-bhk="2" data-service="security">
                     <div class="card-header security">
                         <span class="package-type">BASIC</span>
@@ -1213,6 +1483,7 @@
                     </div>
                 </div>
 
+                <!-- 3 BHK Security Cards -->
                 <div class="automation-card" data-bhk="3" data-service="security">
                     <div class="card-header security">
                         <span class="package-type">BASIC</span>
@@ -1270,6 +1541,7 @@
                     </div>
                 </div>
 
+                <!-- 4 BHK Security Cards -->
                 <div class="automation-card" data-bhk="4" data-service="security">
                     <div class="card-header security">
                         <span class="package-type">BASIC</span>
@@ -1330,9 +1602,12 @@
         </div>
     </section>
 
+    <!-- Benefits Section -->
     <section class="benefits" id="about">
         <h2>Why Choose Epik?</h2>
-        <p class="benefits-subtitle">Experience the future of smart living with our comprehensive solutions</p>
+        <p class="benefits-subtitle">At EPIK, we believe that a smart home is more than just technology—it’s about
+            creating a lifestyle that adapts to you. Choosing us means stepping into a world where innovation meets
+            everyday convenience, comfort, and security.</p>
 
         <div class="benefits-grid">
             <div class="benefit-card">Effortless Control</div>
@@ -1344,6 +1619,7 @@
         </div>
     </section>
 
+    <!-- Contact Section -->
     <section class="contact-section" id="contact">
         <div class="contact-container">
             <div class="contact-info">
@@ -1389,64 +1665,64 @@
                 <h3>Schedule a Consultation</h3>
                 <p class="form-subtitle">Get a personalized smart home demonstration at your doorstep</p>
 
-                <form id="consultationForm">
+                <form onsubmit="handleFormSubmit(event)">
                     <div class="form-group">
-                        <input type="text" id="fullName" name="fullName" placeholder="Full Name *" required>
+                        <input type="text" placeholder="Full Name *" required>
                     </div>
 
                     <div class="form-group">
-                        <input type="email" id="emailAddress" name="email" placeholder="Email Address *" required>
+                        <input type="email" placeholder="Email Address *" required>
                     </div>
 
                     <div class="form-group">
-                        <input type="tel" id="phoneNumber" name="phone" placeholder="Phone Number *" pattern="[0-9]{10,}"
-                            minlength="10" maxlength="15" title="Please enter at least 10 digits (numbers only)"
+                        <input type="tel" placeholder="Phone Number *" pattern="[0-9]{10,}" minlength="10"
+                            maxlength="15" title="Please enter at least 10 digits (numbers only)"
                             oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                     </div>
 
                     <div class="form-group">
-                        <select id="bhkType" name="bhkType" required>
+                        <select required>
                             <option value="">Select BHK Type *</option>
-                            <option value="1 BHK">1 BHK</option>
-                            <option value="2 BHK">2 BHK</option>
-                            <option value="3 BHK">3 BHK</option>
-                            <option value="4 BHK">4 BHK</option>
-                            <option value="4+ BHK">4+ BHK</option>
+                            <option value="1bhk">1 BHK</option>
+                            <option value="2bhk">2 BHK</option>
+                            <option value="3bhk">3 BHK</option>
+                            <option value="4bhk">4 BHK</option>
+                            <option value="4bhk">4+ BHK</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <select id="propertyType" name="propertyType" required>
+                        <select required>
                             <option value="">Type of Property *</option>
-                            <option value="Villa">Villa</option>
-                            <option value="Independent House">Independent House</option>
-                            <option value="Apartment">Apartment</option>
-                            <option value="Builder">Builder</option>
+                            <option value="villa">Villa</option>
+                            <option value="house">Independent House</option>
+                            <option value="apartment">Apartment</option>
+                            <option value="builder">Builder</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <select id="propertyStatus" name="propertyStatus" required>
+                        <select required>
                             <option value="">Status of Property *</option>
-                            <option value="Under Construction">Under Construction</option>
-                            <option value="Construction Completed">Construction Completed</option>
-                            <option value="Renovation">Renovation</option>
-                            <option value="Planning to Construct">Planning to Construct</option>
+                            <option value="under-construction">Under Construction</option>
+                            <option value="completed">Construction Completed</option>
+                            <option value="renovation">Renovation</option>
+                            <option value="planning">Planning to Construct</option>
                         </select>
                     </div>
 
-                    <button type="submit" id="submitBtn" class="submit-btn">Schedule Appointment</button>
+                    <button type="submit" class="submit-btn">Schedule Appointment</button>
                 </form>
             </div>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <div class="footer-logo">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="63.819" height="34.557"
-                        viewBox="0 0 63.819 34.557">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="63.819" height="34.557" viewBox="0 0 63.819 34.557">
                         <g id="Group_2" data-name="Group 2" transform="translate(0 0)">
                             <g id="Group_86451" data-name="Group 86451" transform="translate(0 0)">
                                 <path id="Path_1" data-name="Path 1"
@@ -1513,6 +1789,121 @@
     </footer>
 
     <script>
+
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyrObRPDXQ9Q7omJ-OF-5oyn6LdHEZHNpoWLRQiDK2AXJMCv-7fHfJkoLKINJ2ihFRU/exec';
+
+// Show modal after 5 seconds
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        showModal();
+    }, 5000); // 5 seconds delay
+});
+
+function showModal() {
+    const modal = document.getElementById('contactModal');
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
+
+function closeModal() {
+    const modal = document.getElementById('contactModal');
+    modal.classList.remove('show');
+    document.body.style.overflow = 'auto'; // Restore scrolling
+}
+
+// Close modal when clicking outside
+document.getElementById('contactModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeModal();
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeModal();
+    }
+});
+
+async function handleFormSubmit(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const submitBtn = document.getElementById('submitBtn');
+    const originalBtnText = submitBtn.textContent;
+    
+    // Get form data
+    const formData = new FormData(form);
+    const data = {};
+    
+    // Convert FormData to regular object
+    for (let [key, value] of formData.entries()) {
+        data[key] = value;
+    }
+    
+    // Additional validation for phone number
+    if (data.phone.length < 10) {
+        alert('Phone number must be at least 10 digits long');
+        form.querySelector('input[name="phone"]').focus();
+        return false;
+    }
+    
+    if (!/^[0-9]+$/.test(data.phone)) {
+        alert('Phone number can only contain numbers');
+        form.querySelector('input[name="phone"]').focus();
+        return false;
+    }
+    
+    // Show loading state
+    submitBtn.textContent = 'Submitting...';
+    submitBtn.disabled = true;
+    
+    try {
+        console.log('Sending data:', data);
+        
+        // Send data to Google Sheets
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+            mode: 'cors'
+        });
+        
+        console.log('Response status:', response.status);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const result = await response.json();
+        console.log('Result:', result);
+        
+        if (result.status === 'success') {
+            alert('Thank you! Your appointment request has been submitted successfully. We will contact you soon.');
+            form.reset();
+            closeModal();
+        } else {
+            throw new Error(result.message || 'Submission failed');
+        }
+        
+    } catch (error) {
+        console.error('Error details:', error);
+        alert('Sorry, there was an error submitting your form. Please try again or contact us directly at sales@getepik.in');
+    } finally {
+        // Restore button state
+        submitBtn.textContent = originalBtnText;
+        submitBtn.disabled = false;
+    }
+}
+
+// Optional: Function to manually trigger the popup (you can call this from buttons)
+function openContactPopup() {
+    showModal();
+}
+
+
         let currentBHK = 1;
         let currentService = 'automation';
 
@@ -1567,50 +1958,15 @@
             });
         }
 
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            alert('Thank you for your interest! We will contact you soon to schedule your appointment.');
+        }
+
         function toggleMobileMenu() {
             const navMenu = document.querySelector('.nav-menu');
             navMenu.classList.toggle('active');
         }
-
-        // --- NEW FORM SUBMISSION SCRIPT ---
-
-        // PASTE YOUR GOOGLE APPS SCRIPT URL HERE
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/a/macros/getepik.in/s/AKfycbzuXBRLvEfXE4TPiGrL08MnRVYaDbxoppX8KZTHwhyUSPSk4wXYHBBWti_5fzke4q5I/exec';
-        const form = document.getElementById('consultationForm');
-
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const submitBtn = document.getElementById('submitBtn');
-            const originalBtnText = submitBtn.textContent;
-            submitBtn.textContent = 'Submitting...';
-            submitBtn.disabled = true;
-
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                body: new FormData(form)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.result === 'success') {
-                        alert('Thank you for your interest! We will contact you soon to schedule your appointment.');
-                        form.reset(); // Clear the form fields after successful submission
-                    } else {
-                        // This will show the error message from the Apps Script, if any
-                        console.error('Submission failed:', data.message);
-                        alert('An error occurred: ' + data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('An error occurred while submitting the form. Please check your connection and try again.');
-                })
-                .finally(() => {
-                    // Restore the button to its original state
-                    submitBtn.textContent = originalBtnText;
-                    submitBtn.disabled = false;
-                });
-        });
-
     </script>
 </body>
 
