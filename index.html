@@ -703,6 +703,90 @@
             color: #666;
         }
 
+        /* Contact Form */
+        .contact-form-container {
+            background: #0B2F5C;
+            padding: 2.5rem;
+            border-radius: 15px;
+        }
+
+        .contact-form-container h3 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-group select {
+            color: white;
+        }
+
+        /* Style for when no option is selected (placeholder) */
+        .form-group select:invalid {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-group select option {
+            background: #0B2F5C;
+            color: white;
+        }
+
+        /* Ensure the first option (placeholder) appears dimmed */
+        .form-group select option[value=""] {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #FFD700;
+            color: #0B2F5C;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+
         /* Footer */
         footer {
             background: #0B2F5C;
@@ -887,6 +971,7 @@
 </head>
 
 <body>
+    <!-- Header -->
     <header>
         <nav>
             <a href="#" class="logo">
@@ -915,14 +1000,14 @@
             <div class="nav-menu">
                 <a href="#packages">Packages</a>
                 <a href="#about">About us</a>
-                <a href="#" onclick="openContactPopup()">Contact us</a>
+                <a href="#contact">Contact us</a>
             </div>
             <div class="header-right">
                 <div class="call-info">
                     <div class="call-label">Call us now</div>
                     <div class="phone-number">+91 9632322645</div>
                 </div>
-                <a href="#" class="appointment-btn" onclick="openContactPopup()">Schedule an Appointment</a>
+                <a href="#contact" class="appointment-btn">Schedule an Appointment</a>
             </div>
             <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
                 <span></span>
@@ -932,58 +1017,59 @@
         </nav>
     </header>
 
+    <!-- Popup Modal Overlay -->
     <div id="contactModal" class="modal-overlay">
         <div class="modal-content">
             <button class="close-btn" onclick="closeModal()">&times;</button>
 
             <div class="contact-form-container">
-                <h3>Schedule a Consultation</h3>
-                <p class="form-subtitle">Get a personalized smart home demonstration at your doorstep</p>
+    <h3>Schedule a Consultation</h3>
+    <p class="form-subtitle">Get a personalized smart home demonstration at your doorstep</p>
 
-                <form id="contactForm">
-                    <div class="form-group">
-                        <input type="text" id="formFullName" name="fullName" placeholder="Full Name *" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="formEmail" name="email" placeholder="Email Address *" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="tel" id="formPhone" name="phone" placeholder="Phone Number *" pattern="[0-9]{10}" minlength="10" maxlength="10" title="Please enter a 10-digit phone number" required>
-                    </div>
-                    <div class="form-group">
-                        <select id="formBhkType" name="bhkType" required>
-                            <option value="">Select BHK Type *</option>
-                            <option value="1 BHK">1 BHK</option>
-                            <option value="2 BHK">2 BHK</option>
-                            <option value="3 BHK">3 BHK</option>
-                            <option value="4 BHK">4 BHK</option>
-                            <option value="4+ BHK">4+ BHK</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <select id="formPropertyType" name="propertyType" required>
-                            <option value="">Type of Property *</option>
-                            <option value="Villa">Villa</option>
-                            <option value="Independent House">Independent House</option>
-                            <option value="Apartment">Apartment</option>
-                            <option value="Builder">Builder</option>
-                        </select>                    
-                    </div>
-                    <div class="form-group">
-                        <select id="formPropertyStatus" name="propertyStatus" required>
-                            <option value="">Status of Property *</option>
-                            <option value="Under Construction">Under Construction</option>
-                            <option value="Construction Completed">Construction Completed</option>
-                            <option value="Renovation">Renovation</option>
-                            <option value="Planning to Construct">Planning to Construct</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="submit-btn" id="submitBtn">Schedule Appointment</button>
-                </form>
-            </div>
+    <form id="pageContactForm" class="contact-submission-form">
+        <div class="form-group">
+            <input type="text" id="pageFormFullName" name="fullName" placeholder="Full Name *" required>
+        </div>
+        <div class="form-group">
+            <input type="email" id="pageFormEmail" name="email" placeholder="Email Address *" required>
+        </div>
+        <div class="form-group">
+            <input type="tel" id="pageFormPhone" name="phone" placeholder="Phone Number *" pattern="[0-9]{10}" minlength="10" maxlength="10" title="Please enter a 10-digit phone number" required>
+        </div>
+        <div class="form-group">
+            <select id="pageFormBhkType" name="bhkType" required>
+                <option value="">Select BHK Type *</option>
+                <option value="1 BHK">1 BHK</option>
+                <option value="2 BHK">2 BHK</option>
+                <option value="3 BHK">3 BHK</option>
+                <option value="4 BHK">4 BHK</option>
+                <option value="4+ BHK">4+ BHK</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select id="pageFormPropertyType" name="propertyType" required>
+                <option value="">Type of Property *</option>
+                <option value="Villa">Villa</option>
+                <option value="Independent House">Independent House</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Builder">Builder</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select id="pageFormPropertyStatus" name="propertyStatus" required>
+                <option value="">Status of Property *</option>
+                <option value="Under Construction">Under Construction</option>
+                <option value="Construction Completed">Construction Completed</option>
+                <option value="Renovation">Renovation</option>
+                <option value="Planning to Construct">Planning to Construct</option>
+            </select>
+        </div>
+        <button type="submit" class="submit-btn" id="pageSubmitBtn">Schedule Appointment</button>
+    </form>
+</div>
         </div>
     </div>
-
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <h1>Why & What is Home Automation?</h1>
@@ -997,6 +1083,7 @@
         </div>
     </section>
 
+    <!-- Features Section -->
     <section class="features">
         <div class="features-grid">
             <div class="feature-card">
@@ -1044,6 +1131,7 @@
         </div>
     </section>
 
+    <!-- Packages Section -->
     <section class="packages-section" id="packages">
         <h2>Choose Your Perfect Package</h2>
         <p class="packages-subtitle">Select from our range of smart home packages designed for different home sizes and
@@ -1065,8 +1153,10 @@
             </div>
         </div>
 
+        <!-- Home Automation Section -->
         <div class="service-section active" id="automation-section">
             <div class="automation-cards">
+                <!-- 1 BHK Automation Cards -->
                 <div class="automation-card show" data-bhk="1" data-service="automation">
                     <div class="card-header">
                         <span class="package-type">BASIC</span>
@@ -1080,7 +1170,7 @@
                             <li>AC / Gyser Controls (1)</li>
                             <li>Sensors & IR Emitter (-)</li>
                         </ul>
-                        <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
+                        <a href="#contact" class="contact-button">Enquire Now</a>
                     </div>
                 </div>
 
@@ -1097,7 +1187,7 @@
                             <li>AC / Gyser Controls (1)</li>
                             <li>Sensors & IR Emitter (-)</li>
                         </ul>
-                        <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
+                        <a href="#contact" class="contact-button">Enquire Now</a>
                     </div>
                 </div>
 
@@ -1114,10 +1204,11 @@
                             <li>AC / Gyser Controls (1)</li>
                             <li>Sensors & IR Emitter (1)</li>
                         </ul>
-                        <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
+                        <a href="#contact" class="contact-button">Enquire Now</a>
                     </div>
                 </div>
 
+                <!-- 2 BHK Automation Cards -->
                 <div class="automation-card" data-bhk="2" data-service="automation">
                     <div class="card-header">
                         <span class="package-type">BASIC</span>
@@ -1131,7 +1222,7 @@
                             <li>AC / Gyser Controls (2)</li>
                             <li>Sensors & IR Emitter (-)</li>
                         </ul>
-                        <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
+                        <a href="#contact" class="contact-button">Enquire Now</a>
                     </div>
                 </div>
 
@@ -1148,7 +1239,7 @@
                             <li>AC / Gyser Controls (2)</li>
                             <li>Sensors & IR Emitter (-)</li>
                         </ul>
-                        <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
+                        <a href="#contact" class="contact-button">Enquire Now</a>
                     </div>
                 </div>
 
@@ -1165,10 +1256,11 @@
                             <li>AC / Gyser Controls (2)</li>
                             <li>Sensors & IR Emitter (2)</li>
                         </ul>
-                        <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
+                        <a href="#contact" class="contact-button">Enquire Now</a>
                     </div>
                 </div>
 
+                <!-- 3 BHK Automation Cards -->
                 <div class="automation-card" data-bhk="3" data-service="automation">
                     <div class="card-header">
                         <span class="package-type">BASIC</span>
@@ -1182,7 +1274,7 @@
                             <li>AC / Gyser Controls (3)</li>
                             <li>Sensors & IR Emitter (-)</li>
                         </ul>
-                        <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
+                        <a href="#contact" class="contact-button">Enquire Now</a>
                     </div>
                 </div>
 
@@ -1199,7 +1291,7 @@
                             <li>AC / Gyser Controls (3)</li>
                             <li>Sensors & IR Emitter (-)</li>
                         </ul>
-                        <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
+                        <a href="#contact" class="contact-button">Enquire Now</a>
                     </div>
                 </div>
 
@@ -1216,10 +1308,11 @@
                             <li>AC / Gyser Controls (3)</li>
                             <li>Sensors & IR Emitter (2)</li>
                         </ul>
-                        <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
+                        <a href="#contact" class="contact-button">Enquire Now</a>
                     </div>
                 </div>
 
+                <!-- 4 BHK Automation Cards -->
                 <div class="automation-card" data-bhk="4" data-service="automation">
                     <div class="card-header">
                         <span class="package-type">BASIC</span>
@@ -1233,7 +1326,7 @@
                             <li>AC / Gyser Controls (4)</li>
                             <li>Sensors & IR Emitter (-)</li>
                         </ul>
-                        <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
+                        <a href="#contact" class="contact-button">Enquire Now</a>
                     </div>
                 </div>
 
@@ -1250,7 +1343,7 @@
                             <li>AC / Gyser Controls (4)</li>
                             <li>Sensors & IR Emitter (-)</li>
                         </ul>
-                        <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
+                        <a href="#contact" class="contact-button">Enquire Now</a>
                     </div>
                 </div>
 
@@ -1267,20 +1360,22 @@
                             <li>AC / Gyser Controls (4)</li>
                             <li>Sensors & IR Emitter (2)</li>
                         </ul>
-                        <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
+                        <a href="#contact" class="contact-button">Enquire Now</a>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Home Security Section -->
         <div class="service-section" id="security-section">
             <div class="automation-cards">
+                <!-- 1 BHK Security Cards -->
                 <div class="automation-card show" data-bhk="1" data-service="security">
                     <div class="card-header security">
                         <span class="package-type">BASIC</span>
                     </div>
                     <div class="card-content">
-                         <h3>Basic Security Package</h3>
+                        <h3>Basic Security Package</h3>
                         <div class="price">1,599</div>
                         <ul class="feature-list">
                             <li>Fingerprint Lock - Wardrobe (1)</li>
@@ -1302,7 +1397,6 @@
                             <li>Wifi Camera (-)</li>
                         </ul>
                         <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
-
                     </div>
                 </div>
 
@@ -1317,11 +1411,12 @@
                             <li>Fingerprint Lock - Wardrobe (1)</li>
                             <li>Wifi Camera (1)</li>
                         </ul>
-                        <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
+                        <a href="#contact" class="contact-button">Enquire Now</a>
 
                     </div>
                 </div>
 
+                <!-- 2 BHK Security Cards -->
                 <div class="automation-card" data-bhk="2" data-service="security">
                     <div class="card-header security">
                         <span class="package-type">BASIC</span>
@@ -1335,7 +1430,7 @@
                             <li>Wifi Camera (1)</li>
                             <li>Door Sensor (-)</li>
                         </ul>
-                        <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
+                        <a href="#contact" class="contact-button">Enquire Now</a>
 
                     </div>
                 </div>
@@ -1353,7 +1448,7 @@
                             <li>Wifi Camera (1)</li>
                             <li>Door Sensor (-)</li>
                         </ul>
-                        <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
+                        <a href="#contact" class="contact-button">Enquire Now</a>
 
                     </div>
                 </div>
@@ -1371,11 +1466,12 @@
                             <li>Wifi Camera (1)</li>
                             <li>Door Sensor (1)</li>
                         </ul>
-                        <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
+                        <a href="#contact" class="contact-button">Enquire Now</a>
 
                     </div>
                 </div>
 
+                <!-- 3 BHK Security Cards -->
                 <div class="automation-card" data-bhk="3" data-service="security">
                     <div class="card-header security">
                         <span class="package-type">BASIC</span>
@@ -1390,7 +1486,7 @@
                             <li>Wifi Camera (1)</li>
                             <li>Door Sensor (-)</li>
                         </ul>
-                        <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
+                        <a href="#contact" class="contact-button">Enquire Now</a>
 
                     </div>
                 </div>
@@ -1409,7 +1505,7 @@
                             <li>Wifi Camera (1)</li>
                             <li>Door Sensor (1)</li>
                         </ul>
-                        <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
+                        <a href="#contact" class="contact-button">Enquire Now</a>
 
                     </div>
                 </div>
@@ -1428,11 +1524,12 @@
                             <li>Wifi Camera (1)</li>
                             <li>Door Sensor (1)</li>
                         </ul>
-                        <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
+                        <a href="#contact" class="contact-button">Enquire Now</a>
 
                     </div>
                 </div>
 
+                <!-- 4 BHK Security Cards -->
                 <div class="automation-card" data-bhk="4" data-service="security">
                     <div class="card-header security">
                         <span class="package-type">BASIC</span>
@@ -1447,7 +1544,7 @@
                             <li>Wifi Camera (1)</li>
                             <li>Door Sensor (-)</li>
                         </ul>
-                        <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
+                        <a href="#contact" class="contact-button">Enquire Now</a>
 
                     </div>
                 </div>
@@ -1466,7 +1563,7 @@
                             <li>Wifi Camera (1)</li>
                             <li>Door Sensor (1)</li>
                         </ul>
-                        <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
+                        <a href="#contact" class="contact-button">Enquire Now</a>
 
                     </div>
                 </div>
@@ -1485,16 +1582,18 @@
                             <li>Wifi Camera (1)</li>
                             <li>Door Sensor (1)</li>
                         </ul>
-                        <a href="#" class="contact-button" onclick="openContactPopup()">Enquire Now</a>
+                        <a href="#contact" class="contact-button">Enquire Now</a>
 
                     </div>
                 </div>
             </div>
         </div>
-        <P>*Installation charges will be charged on additional as per actuals of carpenter and Electricians.<br>
-        *All packages are exclusive of GST (GST is as per actuals )</P>
+        <p style="font-size: 8px;">*Installation charges will be charged on additional as per actuals of carpenter and
+            Electricians.<br>
+            *All packages are exclusive of GST (GST is as per actuals )</p>
     </section>
 
+    <!-- Benefits Section -->
     <section class="benefits" id="about">
         <h2>Why Choose Epik?</h2>
         <p class="benefits-subtitle">At EPIK, we believe that a smart home is more than just technology—it’s about
@@ -1511,12 +1610,102 @@
         </div>
     </section>
 
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Get in Touch</h2>
+                <p>Ready to transform your home into a smart living space? Our experts are here to help you choose the
+                    perfect package and guide you through the installation process.</p>
+
+                <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <div>
+                        <strong>Phone</strong>
+                        <span>+91 9632322645</span>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <span class="contact-icon">✉️</span>
+                    <div>
+                        <strong>Email</strong>
+                        <span>sales@getepik.in</span><br>
+                        <span>partner@getepik.in (for partnership)</span>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <span class="contact-icon">📍</span>
+                    <div>
+                        <strong>Location</strong>
+                        <span>Bengaluru, Karnataka, India</span>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <span class="contact-icon">🕒</span>
+                    <div>
+                        <strong>Working Hours</strong>
+                        <span>Mon - Sat: 10:00 AM - 8:00 PM</span>
+                    </div>
+                </div>
+            </div>
+
+           <div class="contact-form-container">
+    <h3>Schedule a Consultation</h3>
+    <p class="form-subtitle">Get a personalized smart home demonstration at your doorstep</p>
+
+    <form id="pageContactForm" class="contact-submission-form">
+        <div class="form-group">
+            <input type="text" id="pageFormFullName" name="fullName" placeholder="Full Name *" required>
+        </div>
+        <div class="form-group">
+            <input type="email" id="pageFormEmail" name="email" placeholder="Email Address *" required>
+        </div>
+        <div class="form-group">
+            <input type="tel" id="pageFormPhone" name="phone" placeholder="Phone Number *" pattern="[0-9]{10}" minlength="10" maxlength="10" title="Please enter a 10-digit phone number" required>
+        </div>
+        <div class="form-group">
+            <select id="pageFormBhkType" name="bhkType" required>
+                <option value="">Select BHK Type *</option>
+                <option value="1 BHK">1 BHK</option>
+                <option value="2 BHK">2 BHK</option>
+                <option value="3 BHK">3 BHK</option>
+                <option value="4 BHK">4 BHK</option>
+                <option value="4+ BHK">4+ BHK</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select id="pageFormPropertyType" name="propertyType" required>
+                <option value="">Type of Property *</option>
+                <option value="Villa">Villa</option>
+                <option value="Independent House">Independent House</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Builder">Builder</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select id="pageFormPropertyStatus" name="propertyStatus" required>
+                <option value="">Status of Property *</option>
+                <option value="Under Construction">Under Construction</option>
+                <option value="Construction Completed">Construction Completed</option>
+                <option value="Renovation">Renovation</option>
+                <option value="Planning to Construct">Planning to Construct</option>
+            </select>
+        </div>
+        <button type="submit" class="submit-btn" id="pageSubmitBtn">Schedule Appointment</button>
+    </form>
+</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <div class="footer-logo">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="63.819" height="34.557"
-                        viewBox="0 0 63.819 34.557">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="63.819" height="34.557" viewBox="0 0 63.819 34.557">
                         <g id="Group_2" data-name="Group 2" transform="translate(0 0)">
                             <g id="Group_86451" data-name="Group 86451" transform="translate(0 0)">
                                 <path id="Path_1" data-name="Path 1"
@@ -1548,7 +1737,7 @@
                 <ul class="footer-links">
                     <li><a href="#packages">Our Packages</a></li>
                     <li><a href="#about">About Us</a></li>
-                    <li><a href="#" onclick="openContactPopup()">Contact</a></li>
+                    <li><a href="#contact">Contact</a></li>
                     <li><a href="#">Installation</a></li>
                     <li><a href="#">Support</a></li>
                 </ul>
@@ -1583,104 +1772,113 @@
     </footer>
 
     <script>
-        // --- CONFIGURATION ---
+
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby63DKanL67LJKjbfl8ATHzge_wHu7gYZBMJWENJyGpSw2dujr0UfLMFhYmZiPfBniq/exec';
 
-        // --- MODAL AND POPUP LOGIC ---
         const modal = document.getElementById('contactModal');
         const form = document.getElementById('contactForm');
         const submitBtn = document.getElementById('submitBtn');
 
-        // Show modal after 5 seconds on first visit
+        // Show modal after 5 seconds
         document.addEventListener('DOMContentLoaded', function () {
-            // Uncomment the following lines to enable the 5-second auto-popup
-            // setTimeout(function() {
-            //     showModal();
-            // }, 5000);
+            setTimeout(function () {
+                showModal();
+            }, 5000); // 5 seconds delay
         });
 
         function showModal() {
+            const modal = document.getElementById('contactModal');
             modal.classList.add('show');
             document.body.style.overflow = 'hidden'; // Prevent background scrolling
         }
 
         function closeModal() {
+            const modal = document.getElementById('contactModal');
             modal.classList.remove('show');
             document.body.style.overflow = 'auto'; // Restore scrolling
         }
 
-        // This function can be called by any button/link on your page
-        function openContactPopup() {
-            modal.classList.add('show');
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Close modal when clicking on the overlay
-        modal.addEventListener('click', function (e) {
+        // Close modal when clicking outside
+        document.getElementById('contactModal').addEventListener('click', function (e) {
             if (e.target === this) {
                 closeModal();
             }
         });
 
-        // Close modal with the Escape key
+        // Close modal with Escape key
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
                 closeModal();
             }
         });
 
+        // Add this JavaScript to handle both forms using their shared class name
 
-        // --- FORM SUBMISSION LOGIC ---
-        form.addEventListener('submit', async function(event) {
-            event.preventDefault();
-            submitBtn.textContent = 'Submitting...';
-            submitBtn.disabled = true;
+        // Select all forms with the specified class
+        document.querySelectorAll('.contact-submission-form').forEach(form => {
 
-            // 1. Collect data from form fields
-            const formData = {
-                timestamp: new Date().toLocaleString("en-IN", {timeZone: "Asia/Kolkata"}),
-                fullName: document.getElementById('formFullName').value,
-                email: document.getElementById('formEmail').value,
-                phone: document.getElementById('formPhone').value,
-                bhkType: document.getElementById('formBhkType').value,
-                propertyType: document.getElementById('formPropertyType').value,
-                propertyStatus: document.getElementById('formPropertyStatus').value,
-            };
+            form.addEventListener('submit', async function (event) {
+                event.preventDefault(); // Prevent default page reload
 
-            try {
-                // 2. Send data to Google Apps Script (fire-and-forget)
-                await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors', // Use no-cors for fire-and-forget submission
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData),
-                });
+                // Find the submit button within *this specific form*
+                const submitButton = form.querySelector('.submit-btn');
+                submitButton.textContent = 'Submitting...';
+                submitButton.disabled = true;
 
-                // 3. Show success message and reset form (optimistic response)
-                alert('Thank you! Your request has been submitted successfully. We will contact you soon.');
-                form.reset();
-                closeModal();
+                // Collect data by input 'name' attribute, relative to the current form.
+                // This avoids ID conflicts entirely.
+                const formData = {
+                    timestamp: new Date().toLocaleString("en-IN", {timeZone: "Asia/Kolkata"}),
+                    fullName: form.querySelector('[name="fullName"]').value,
+                    email: form.querySelector('[name="email"]').value,
+                    phone: form.querySelector('[name="phone"]').value,
+                    bhkType: form.querySelector('[name="bhkType"]').value,
+                    propertyType: form.querySelector('[name="propertyType"]').value,
+                    propertyStatus: form.querySelector('[name="propertyStatus"]').value,
+                };
 
-            } catch (error) {
-                console.error('Submission Error:', error);
-                alert('Sorry, there was a problem with your submission. Please try again or contact us directly.');
-            } finally {
-                submitBtn.textContent = 'Schedule Appointment';
-                submitBtn.disabled = false;
-            }
+                try {
+                    await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData),
+                    });
+
+                    alert('Thank you! Your request has been submitted successfully. We will contact you soon.');
+                    form.reset();
+
+                    // If the modal exists and this function is defined, try closing it.
+                    if (typeof closeModal === 'function') {
+                        closeModal();
+                    }
+
+                } catch (error) {
+                    console.error('Submission Error:', error);
+                    alert('Sorry, there was a problem with your submission. Please try again or contact us directly.');
+                } finally {
+                    submitButton.textContent = 'Schedule Appointment';
+                    submitButton.disabled = false;
+                }
+            });
         });
+        // Optional: Function to manually trigger the popup (you can call this from buttons)
+        function openContactPopup() {
+            showModal();
+        }
 
-      
-        // --- PAGE INTERACTIVITY (BHK Selectors, etc.) ---
+
         let currentBHK = 1;
         let currentService = 'automation';
 
+        // Initialize the page
         document.addEventListener('DOMContentLoaded', function () {
             showPackages();
         });
 
+        // BHK selector functionality
         document.querySelectorAll('.bhk-btn').forEach(btn => {
             btn.addEventListener('click', function () {
                 document.querySelectorAll('.bhk-btn').forEach(b => b.classList.remove('active'));
@@ -1690,12 +1888,14 @@
             });
         });
 
+        // Service category selector functionality
         document.querySelectorAll('.service-btn').forEach(btn => {
             btn.addEventListener('click', function () {
                 document.querySelectorAll('.service-btn').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
                 currentService = this.getAttribute('data-service');
 
+                // Toggle sections
                 document.querySelectorAll('.service-section').forEach(section => {
                     section.classList.remove('active');
                 });
@@ -1711,15 +1911,22 @@
         });
 
         function showPackages() {
+            // Hide all cards first
             document.querySelectorAll('.automation-card').forEach(card => {
                 card.classList.remove('show');
                 card.style.display = 'none';
             });
 
+            // Show cards matching current BHK and service
             document.querySelectorAll(`.automation-card[data-bhk="${currentBHK}"][data-service="${currentService}"]`).forEach(card => {
                 card.classList.add('show');
                 card.style.display = 'block';
             });
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            alert('Thank you for your interest! We will contact you soon to schedule your appointment.');
         }
 
         function toggleMobileMenu() {
